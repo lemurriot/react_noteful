@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 export default function Nav(props) {
     return (
-        <header>
-            <Link to="/"><h1>Noteful</h1></Link>
-        </header>
+        <div>Nav</div>
     )
 }
