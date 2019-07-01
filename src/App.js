@@ -60,6 +60,7 @@ class App extends Component {
                 <>
                 <NavFull 
                   folders={this.state.folders}
+                  selectedFolder={{}}
                 />
                 <NoteList 
                   notes={this.state.notes}
