@@ -10,11 +10,12 @@ export default function NoteList(props) {
                 name={note.name} 
                 modified={note.modified}
             />
-        );
-    })
-    return (
-        <div>
-            {notes}
-        </div>
+            );
+        })
+        return (
+            <section>
+                {notes}
+                <button className="add_note_btn">Add note</button>
+            </section>
     )
 }

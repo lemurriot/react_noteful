@@ -3,7 +3,8 @@ import { Switch, Route, Link } from 'react-router-dom'
 import STORE from './dummy-store.js';
 import NoteList from './NoteList'
 import SelectedNote from './SelectedNote'
-import Nav from './Nav'
+import NavPartial from './NavPartial'
+import NavFull from './NavFull'
 import './App.css';
 
 class App extends Component {
@@ -37,7 +38,7 @@ class App extends Component {
     const currentNotes = this.state.notes.filter(note => note.folderId === currentFolder.id)
     console.log(currentNotes)
     return {
-      folder: currentFolder ? [currentFolder] : [stubFolder],
+      folder: currentFolder ? currentFolder : stubFolder,
       notes: currentNotes ? currentNotes : stubNote
     }
   }
@@ -57,7 +58,7 @@ class App extends Component {
               path="/" 
               render={() => (
                 <>
-                <Nav 
+                <NavFull 
                   folders={this.state.folders}
                 />
                 <NoteList 
@@ -69,7 +70,7 @@ class App extends Component {
               render={routeProps => {
                 return (
                   <>
-                  <Nav 
+                  <NavPartial 
                     {...routeProps}
                     folders={this.currentFolder(routeProps.match.params.id)}
                   />
@@ -84,9 +85,10 @@ class App extends Component {
               render={routeProps => {
                 return (
                   <>
-                  <Nav 
+                  <NavFull 
                     {...routeProps}
-                    folders={this.currentFolderSelection(routeProps.match.params.id).folder}
+                    folders={this.state.folders}
+                    selectedFolder={this.currentFolderSelection(routeProps.match.params.id).folder}
                   />
                   <NoteList
                     {...routeProps}

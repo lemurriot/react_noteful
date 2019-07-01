@@ -6,3 +6,6 @@
     align-items: center;
     margin-bottom: 2%;
 }
+.highlighted {
+    background-color: yellow;
+}
