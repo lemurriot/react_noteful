@@ -1,8 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import './Nav.css'
+import Folder from './Folder'
 
 export default function Nav(props) {
+    const folderList = props.folders.map(folder => <Folder key={folder.id} id={folder.id} name={folder.name}/>)
     return (
-        <div>Nav</div>
+        <nav>
+            {folderList}
+        </nav>
     )
 }

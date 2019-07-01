@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import STORE from './dummy-store.js';
 import NoteList from './NoteList'
 import SelectedNote from './SelectedNote'
@@ -19,13 +19,19 @@ class App extends Component {
   }
 
   currentNote(noteId) {
-    var stubNote = {id: "none", content: "some sample", name: "some name"}
-    var currentNote = this.state.notes.find(note => note.id === noteId)
+    const stubNote = {id: "none", content: "none", name: "none", folderId: "none"}
+    const currentNote = this.state.notes.find(note => note.id === noteId)
     return currentNote ? currentNote : stubNote
+  }
+  currentFolder(noteId){
+    const stubFolder = {id: "none", name: "none"}
+    const getNote = this.currentNote(noteId)
+    const currentFolderId = getNote.folderId
+    const currentFolder = this.state.folders.find(folder => folder.id === currentFolderId)
+    return currentFolder ? [currentFolder] : [stubFolder]
   }
   
   render(){
-    const findNote = (notes=[], noteId) => notes.find(note => note.id === noteId)
     return (
       <>
         <header>
@@ -34,26 +40,32 @@ class App extends Component {
         </header>
         </header>
         <section className="main-section">
-          <Nav 
-            notes={this.state.notes}
-            folders={this.state.folders}
-          />
           <Switch>
             <Route 
               exact 
               path="/" 
               render={() => (
+                <>
+                <Nav 
+                  folders={this.state.folders}
+                />
                 <NoteList 
                   notes={this.state.notes}
-                />)}
+                /></>)}
             />
             <Route 
               path="/note/:id"
               render={routeProps => {
-                return <SelectedNote 
-                  {...routeProps}
-                  notes={this.currentNote(routeProps.match.params.id)}
-                />
+                return (
+                  <>
+                  <Nav 
+                    {...routeProps}
+                    folders={this.currentFolder(routeProps.match.params.id)}
+                  />
+                  <SelectedNote 
+                    {...routeProps}
+                    notes={this.currentNote(routeProps.match.params.id)}
+                  /></>)
               }}
             />
           </Switch>
