@@ -30,6 +30,17 @@ class App extends Component {
     const currentFolder = this.state.folders.find(folder => folder.id === currentFolderId)
     return currentFolder ? [currentFolder] : [stubFolder]
   }
+  currentFolderSelection(folderId){
+    const stubFolder = {id: "none", name: "none"}
+    const stubNote = {id: "none", content: "none", name: "none", folderId: "none", modified: "2019-01-03T00:00:00.000Z"}
+    const currentFolder = this.state.folders.find(folder => folder.id === folderId)
+    const currentNotes = this.state.notes.filter(note => note.folderId === currentFolder.id)
+    console.log(currentNotes)
+    return {
+      folder: currentFolder ? [currentFolder] : [stubFolder],
+      notes: currentNotes ? currentNotes : stubNote
+    }
+  }
   
   render(){
     return (
@@ -65,6 +76,21 @@ class App extends Component {
                   <SelectedNote 
                     {...routeProps}
                     notes={this.currentNote(routeProps.match.params.id)}
+                  /></>)
+              }}
+            />
+            <Route 
+              path="/folder/:id"
+              render={routeProps => {
+                return (
+                  <>
+                  <Nav 
+                    {...routeProps}
+                    folders={this.currentFolderSelection(routeProps.match.params.id).folder}
+                  />
+                  <NoteList
+                    {...routeProps}
+                    notes={this.currentFolderSelection(routeProps.match.params.id).notes}
                   /></>)
               }}
             />
