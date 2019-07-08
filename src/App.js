@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route, Link } from 'react-router-dom'
-import STORE from './dummy-store.js';
+// import STORE from './dummy-store.js';
 import NoteList from './NoteList'
 import SelectedNote from './SelectedNote'
 import NavPartial from './NavPartial'
@@ -16,7 +16,32 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    this.setState(STORE)
+    fetch('http://localhost:9090/notes')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error()
+        }
+        return res.json()
+      }).then(res => {
+        this.setState({
+          notes: res
+        })
+      }).catch(err => {
+        console.log(err)
+      })
+    fetch('http://localhost:9090/folders')
+      .then(res => {
+        if (!res.ok) {
+          throw new Error()
+        }
+        return res.json()
+      }).then(res => {
+        this.setState({
+          folders: res
+        })
+      }).catch(err => {
+        console.log(err)
+      })
   }
 
   currentNote(noteId) {
