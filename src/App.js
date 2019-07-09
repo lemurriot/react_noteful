@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
+import NotefulContext from './NotefulContext'
+import Main from './Main'
 // import STORE from './dummy-store.js';
 import NoteList from './NoteList'
 import SelectedNote from './SelectedNote'
 import NavPartial from './NavPartial'
 import NavFull from './NavFull'
 import './App.css';
+import SelectedNotePage from './SelectedNotePage'
+import SelectedFolderPage from './SelectedFolderPage'
 
 class App extends Component {
   constructor(props){
@@ -19,7 +23,7 @@ class App extends Component {
     fetch('http://localhost:9090/notes')
       .then(res => {
         if (!res.ok) {
-          throw new Error()
+          throw new Error(res.status)
         }
         return res.json()
       }).then(res => {
@@ -32,7 +36,7 @@ class App extends Component {
     fetch('http://localhost:9090/folders')
       .then(res => {
         if (!res.ok) {
-          throw new Error()
+          throw new Error(res.status)
         }
         return res.json()
       }).then(res => {
@@ -45,9 +49,8 @@ class App extends Component {
   }
 
   currentNote(noteId) {
-    const stubNote = {id: "none", content: "none", name: "none", folderId: "none"}
     const currentNote = this.state.notes.find(note => note.id === noteId)
-    return currentNote ? currentNote : stubNote
+    return currentNote ? currentNote : {}
   }
   currentFolder(noteId){
     const stubFolder = {id: "none", name: "none"}
@@ -57,20 +60,21 @@ class App extends Component {
     return currentFolder ? [currentFolder] : [stubFolder]
   }
   currentFolderSelection(folderId){
-    const stubFolder = {id: "none", name: "none"}
-    const stubNote = {id: "none", content: "none", name: "none", folderId: "none", modified: "2019-01-03T00:00:00.000Z"}
     const currentFolder = this.state.folders.find(folder => folder.id === folderId)
     const currentNotes = this.state.notes.filter(note => note.folderId === currentFolder.id)
-    console.log(currentNotes)
     return {
-      folder: currentFolder ? currentFolder : stubFolder,
-      notes: currentNotes ? currentNotes : stubNote
+      folder: currentFolder ? currentFolder : {},
+      notes: currentNotes ? currentNotes : {}
     }
   }
   
   render(){
+    const contextVal = {
+      notes: this.state.notes,
+      folders: this.state.folders
+    }
     return (
-      <>
+      <NotefulContext.Provider value={contextVal}>
         <header>
         <header>
             <Link to="/"><h1>Noteful</h1></Link>
@@ -81,50 +85,19 @@ class App extends Component {
             <Route 
               exact 
               path="/" 
-              render={() => (
-                <>
-                <NavFull 
-                  folders={this.state.folders}
-                  selectedFolder={{}}
-                />
-                <NoteList 
-                  notes={this.state.notes}
-                /></>)}
+              component={Main}
             />
             <Route 
               path="/note/:id"
-              render={routeProps => {
-                return (
-                  <>
-                  <NavPartial 
-                    {...routeProps}
-                    folders={this.currentFolder(routeProps.match.params.id)}
-                  />
-                  <SelectedNote 
-                    {...routeProps}
-                    notes={this.currentNote(routeProps.match.params.id)}
-                  /></>)
-              }}
+              component={SelectedNotePage}
             />
             <Route 
               path="/folder/:id"
-              render={routeProps => {
-                return (
-                  <>
-                  <NavFull 
-                    {...routeProps}
-                    folders={this.state.folders}
-                    selectedFolder={this.currentFolderSelection(routeProps.match.params.id).folder}
-                  />
-                  <NoteList
-                    {...routeProps}
-                    notes={this.currentFolderSelection(routeProps.match.params.id).notes}
-                  /></>)
-              }}
+              component={SelectedFolderPage}
             />
           </Switch>
         </section>
-      </>
+      </NotefulContext.Provider>
     );
   }
 }
