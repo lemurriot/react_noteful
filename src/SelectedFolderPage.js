@@ -12,19 +12,19 @@ export default class SelectedFolderPage extends Component {
         }
     }
     render() {
-        const { folders = [{"id": "loading", "name": "loading"}], notes } = this.context
+        const { folders, notes } = this.context
         console.log(folders)
         const { id: folderId } = this.props.match.params
         const selectedFolder = findCurrentFolderSelection(folders, notes, folderId)
         return (
             <>
                 <NavFull 
-                    folders={this.context}
+                    folders={folders}
                     selectedFolder={selectedFolder.folder}
                 />
                 <NoteList 
-                    folders={this.context}
-                    selectedFolder={selectedFolder.notes}
+                    folders={folders}
+                    notes={selectedFolder.notes}
                 />
             </>
         )
