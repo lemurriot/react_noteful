@@ -16,7 +16,8 @@ class App extends Component {
     super(props)
     this.state = {
       notes: [],
-      folders: []
+      folders: [],
+      error: null
     }
   }
   componentDidMount(){
@@ -30,8 +31,11 @@ class App extends Component {
         this.setState({
           notes: res
         })
-      }).catch(err => {
-        console.log(err)
+      }).catch(error => {
+        console.log(error)
+        this.setState({
+          error
+        })
       })
     fetch('http://localhost:9090/folders')
       .then(res => {
@@ -43,35 +47,45 @@ class App extends Component {
         this.setState({
           folders: res
         })
-      }).catch(err => {
-        console.log(err)
+      }).catch(error => {
+        console.log(error)
+        this.setState({
+          error
+        })
       })
   }
 
-  currentNote(noteId) {
-    const currentNote = this.state.notes.find(note => note.id === noteId)
-    return currentNote ? currentNote : {}
-  }
-  currentFolder(noteId){
-    const stubFolder = {id: "none", name: "none"}
-    const getNote = this.currentNote(noteId)
-    const currentFolderId = getNote.folderId
-    const currentFolder = this.state.folders.find(folder => folder.id === currentFolderId)
-    return currentFolder ? [currentFolder] : [stubFolder]
-  }
-  currentFolderSelection(folderId){
-    const currentFolder = this.state.folders.find(folder => folder.id === folderId)
-    const currentNotes = this.state.notes.filter(note => note.folderId === currentFolder.id)
-    return {
-      folder: currentFolder ? currentFolder : {},
-      notes: currentNotes ? currentNotes : {}
-    }
+  deleteNote = (noteId) => {
+
+    fetch(`http://localhost:9090/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(res => {
+      if (!res.ok){
+        throw new Error(res.status)
+      }
+      return res.json()
+    }).then(res => {
+      const newNoteSet = this.state.notes.filter(note => note.id !== noteId)
+      console.log(newNoteSet)
+      this.setState({
+        notes: newNoteSet
+      })
+    }).catch(error => {
+      console.log(error)
+      this.setState({
+        error
+      })
+    })
   }
   
   render(){
     const contextVal = {
       notes: this.state.notes,
-      folders: this.state.folders
+      folders: this.state.folders,
+      deleteNote: this.deleteNote
     }
     return (
       <NotefulContext.Provider value={contextVal}>

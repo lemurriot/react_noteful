@@ -10,7 +10,7 @@ export default function Note(props) {
         <div className="note">
             <Link to={`/note/${props.id}`}><h3>{props.name}</h3></Link>
             <span>Modified on {month}/{day}/{year}</span>
-            <button>Delete Note</button>
+            <button onClick={() => props.deleteNote(props.id)}>Delete Note</button>
         </div>
     )
 }

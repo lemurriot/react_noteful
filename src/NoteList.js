@@ -9,6 +9,7 @@ export default function NoteList(props) {
                 id={note.id}
                 name={note.name} 
                 modified={note.modified}
+                deleteNote={props.deleteNote}
             />
             );
         })

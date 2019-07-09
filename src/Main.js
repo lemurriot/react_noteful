@@ -15,6 +15,7 @@ export default function Main() {
                     />
                     <NoteList 
                         notes={context.notes}
+                        deleteNote={context.deleteNote}
                     />
                     </>
                 );
