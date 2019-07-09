@@ -20,6 +20,7 @@ export default class SelectedNotePage extends Component {
             <>
                 <NavPartial 
                     folders={folder}
+                    routerHistoryProps={this.props.history}
                 />
                 <SelectedNote 
                     notes={note}
