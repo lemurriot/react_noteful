@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
+import NotefulContext from './NotefulContext'
 
 export default class AddFolder extends Component {
     constructor(props){
@@ -8,13 +9,27 @@ export default class AddFolder extends Component {
             name: ''
         }
     }
+    static contextType = NotefulContext
     handleSubmit(e){
         e.preventDefault()
         const newFolder = {
             "id": uuid.v4(),
             "name": this.state.name
         }
-        console.log(newFolder)
+        fetch('http://localhost:9090/folders', {
+            method: 'POST',
+            body: JSON.stringify(newFolder),
+            headers: {
+              'content-type': 'application/json' 
+            }
+          }).then(res => {
+            if (!res.ok) throw new Error(res.status)
+            return res.json()
+          }).then(res => {
+            this.context.addFolder(res)
+          }).catch(error => {
+              console.log(error)
+          })
 
     }
     handleInputUpdate(e){

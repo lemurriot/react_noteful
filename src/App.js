@@ -77,12 +77,18 @@ class App extends Component {
       })
     })
   }
+  addFolder = folder => {
+    this.setState({
+      folders: [...this.state.folders, folder]
+    })
+  }
   
   render(){
     const contextVal = {
       notes: this.state.notes,
       folders: this.state.folders,
-      deleteNote: this.deleteNote
+      deleteNote: this.deleteNote,
+      addFolder: this.addFolder
     }
     return (
       <NotefulContext.Provider value={contextVal}>
