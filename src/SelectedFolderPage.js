@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
 import { findCurrentFolderSelection } from './helperFunctions/helpers'
-import NavFull from './NavFull'
+import NavFull from './Nav/NavFull'
 import NoteList from './NoteList'
 
 export default class SelectedFolderPage extends Component {

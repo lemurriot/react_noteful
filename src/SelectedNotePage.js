@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
-import NavPartial from './NavPartial'
+import NavPartial from './Nav/NavPartial'
 import SelectedNote from './SelectedNote'
 import { findCurrentNote, findCurrentFolder } from './helperFunctions/helpers.js'
 

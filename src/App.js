@@ -2,14 +2,11 @@ import React, { Component } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
 import Main from './Main'
-// import STORE from './dummy-store.js';
-import NoteList from './NoteList'
-import SelectedNote from './SelectedNote'
-import NavPartial from './NavPartial'
-import NavFull from './NavFull'
 import './App.css';
 import SelectedNotePage from './SelectedNotePage'
 import SelectedFolderPage from './SelectedFolderPage'
+import AddNote from './AddNote'
+import AddFolder from './AddFolder'
 
 class App extends Component {
   constructor(props){
@@ -108,6 +105,14 @@ class App extends Component {
             <Route 
               path="/folder/:id"
               component={SelectedFolderPage}
+            />
+            <Route 
+              path="/add-note"
+              component={AddNote}
+            />
+            <Route 
+              path="/add-folder"
+              component={AddFolder}
             />
           </Switch>
         </section>

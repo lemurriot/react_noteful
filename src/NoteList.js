@@ -1,5 +1,6 @@
 import React from 'react'
 import Note from './Note'
+import { Link } from 'react-router-dom'
 
 export default function NoteList(props) {
     const notes = props.notes.map(note => {
@@ -16,7 +17,9 @@ export default function NoteList(props) {
         return (
             <section>
                 {notes}
-                <button className="add_note_btn">Add note</button>
+                <Link to="/add-note">
+                    <button className="add_note_btn">Add note</button>
+                </Link>
             </section>
     )
 }

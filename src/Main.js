@@ -1,5 +1,5 @@
 import React from 'react'
-import NavFull from './NavFull'
+import NavFull from './Nav/NavFull'
 import NoteList from './NoteList'
 import NotefulContext from './NotefulContext'
 
