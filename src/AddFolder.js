@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
 import NotefulContext from './NotefulContext'
+import ValidationError from './Validation/ValidationError'
 
 export default class AddFolder extends Component {
     constructor(props){
         super(props)
         this.state = {
-            name: ''
+            name: {
+                value: '',
+                touched: false
+            }
         }
     }
     static contextType = NotefulContext
@@ -14,7 +18,7 @@ export default class AddFolder extends Component {
         e.preventDefault()
         const newFolder = {
             "id": uuid.v4(),
-            "name": this.state.name
+            "name": this.state.name.value
         }
         fetch('http://localhost:9090/folders', {
             method: 'POST',
@@ -27,6 +31,13 @@ export default class AddFolder extends Component {
             return res.json()
           }).then(res => {
             this.context.addFolder(res)
+            this.setState({
+                name: {
+                    value: '',
+                    touched: false
+                }
+            })
+            this.props.history.push('/')
           }).catch(error => {
               console.log(error)
           })
@@ -34,8 +45,16 @@ export default class AddFolder extends Component {
     }
     handleInputUpdate(e){
         this.setState({
-            name: e.target.value
+            name: {
+                value: e.target.value,
+                touched: true
+            }
         })
+    }
+    validateFolderName(){
+        const name = this.state.name.value.trim()
+        if (name.length === 0) return 'Name is required'
+        else if (this.context.folders.find(folder => folder.name === name)) return 'Name must be unique'
     }
     render() {
         return (
@@ -46,8 +65,10 @@ export default class AddFolder extends Component {
                         type="text" 
                         id="name" 
                         name="name" 
-                        value={this.state.name}
-                        onChange={e => this.handleInputUpdate(e)} required/>
+                        value={this.state.name.value}
+                        onChange={e => this.handleInputUpdate(e)} required
+                    />
+                    {this.state.name.touched && (<ValidationError message={this.validateFolderName()} />)}
                     <div className="form-button-group">
                         <button 
                             className="cancel-btn"
@@ -55,7 +76,10 @@ export default class AddFolder extends Component {
                         >
                             Cancel
                         </button>
-                        <button className="submit-btn">
+                        <button 
+                            className="submit-btn"
+                            disabled={this.validateFolderName()}
+                        >
                             Submit
                         </button>
                     </div>

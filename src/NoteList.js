@@ -16,6 +16,7 @@ export default function NoteList(props) {
         })
         return (
             <section>
+                {!notes.length && (<p>There are no notes yet in this folder</p>)}
                 {notes}
                 <Link to="/add-note">
                     <button className="add_note_btn">Add note</button>

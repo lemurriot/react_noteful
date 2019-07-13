@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import './AddNote.css'
 
 export default class AddNote extends Component {
     constructor(props){
@@ -27,7 +28,7 @@ export default class AddNote extends Component {
     render() {
         const folderOptions = this.context.folders.map(folder => <option key={folder.id} value={folder.id} id={folder.id}>{folder.name}</option>)
         return (
-            <section>
+            <section className="add-note-section">
                 <form 
                     className="add-note-form" 
                     onSubmit={e => this.handleSubmit(e)}
