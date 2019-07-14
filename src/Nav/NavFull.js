@@ -1,6 +1,6 @@
 import React from 'react'
 import './Nav.css'
-import Folder from '../Folder'
+import Folder from '../Folder/Folder'
 import { Link } from 'react-router-dom'
 import FolderError from '../ErrorBoundaries/FolderError'
 import PropTypes from 'prop-types'

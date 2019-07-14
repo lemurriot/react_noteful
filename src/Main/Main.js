@@ -1,7 +1,9 @@
 import React from 'react'
-import NavFull from './Nav/NavFull'
-import NoteList from './NoteList'
-import NotefulContext from './NotefulContext'
+import NavFull from '../Nav/NavFull'
+import NoteList from '../NoteList/NoteList'
+import NotefulContext from '../NotefulContext'
+import PropTypes from 'prop-types'
+
 
 export default function Main() {
     return (
@@ -22,4 +24,10 @@ export default function Main() {
             }}
         </NotefulContext.Consumer>
     )
+}
+
+Main.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
 }

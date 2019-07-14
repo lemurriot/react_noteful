@@ -1,6 +1,8 @@
 import React from 'react'
-import Note from './Note'
+import Note from '../Note/Note'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 
 export default function NoteList(props) {
     const notes = props.notes.map(note => {
@@ -23,4 +25,15 @@ export default function NoteList(props) {
                 </Link>
             </section>
     )
+}
+
+NoteList.propTypes = {
+    deleteNote: PropTypes.func.isRequired,
+    notes: PropTypes.arrayOf(PropTypes.shape({
+        content: PropTypes.string.isRequired,
+        folderId: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        name: PropTypes.string.isRequired,
+    }))
 }

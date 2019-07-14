@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import NotefulContext from './NotefulContext'
-import ValidationError from './Validation/ValidationError'
+import NotefulContext from '../NotefulContext'
+import ValidationError from '../Validation/ValidationError'
+import PropTypes from 'prop-types'
+
 import uuid from 'uuid'
 import './AddNote.css'
 
@@ -124,4 +126,10 @@ export default class AddNote extends Component {
             </section>
         )
     }
+}
+
+AddNote.propTypes = {
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+
 
 export default function Note(props) {
     const dateString = new Date(props.modified)
@@ -14,3 +16,17 @@ export default function Note(props) {
         </div>
     )
 }
+
+Note.defaultProps = {
+    deleteNote: () => {},
+    id: '',
+    modified: '',
+    name: ''
+}
+Note.propTypes = {
+    deleteNote: PropTypes.func.isRequired,
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
+    name: PropTypes.string.isRequired,
+}
+

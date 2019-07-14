@@ -12,7 +12,6 @@ export const findCurrentFolder = (folders, noteId, notes) => {
   }
 
 export const findCurrentFolderSelection = (folders, notes, folderId) => {
-  console.log(folders, notes, folderId)
     const currentFolder = folders.find(folder => folder.id === folderId) || {}
     const currentNotes = notes.filter(note => note.folderId === currentFolder.id) || {}
     return {

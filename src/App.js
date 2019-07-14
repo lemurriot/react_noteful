@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import Main from './Main'
+import Main from './Main/Main'
 import './App.css';
-import SelectedNotePage from './SelectedNotePage'
-import SelectedFolderPage from './SelectedFolderPage'
-import AddNote from './AddNote'
-import AddFolder from './AddFolder'
+import SelectedNotePage from './SelectedNotes/SelectedNotePage'
+import SelectedFolderPage from './SelectedFolder/SelectedFolderPage'
+import AddNote from './AddNote/AddNote'
+import AddFolder from './AddFolder/AddFolder'
 
 class App extends Component {
   constructor(props){

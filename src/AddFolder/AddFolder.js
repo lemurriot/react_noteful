@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import uuid from 'uuid'
-import NotefulContext from './NotefulContext'
-import ValidationError from './Validation/ValidationError'
+import NotefulContext from '../NotefulContext'
+import ValidationError from '../Validation/ValidationError'
+import PropTypes from 'prop-types'
+
 
 export default class AddFolder extends Component {
     constructor(props){
@@ -89,4 +91,10 @@ export default class AddFolder extends Component {
             </section>
         )
     }
+}
+
+AddFolder.propTypes = {
+    history: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
 }
