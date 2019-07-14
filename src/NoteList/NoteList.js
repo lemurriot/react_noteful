@@ -2,6 +2,7 @@ import React from 'react'
 import Note from '../Note/Note'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import './NoteList.css'
 
 
 export default function NoteList(props) {
@@ -21,7 +22,7 @@ export default function NoteList(props) {
                 {!notes.length && (<p>There are no notes yet in this folder</p>)}
                 {notes}
                 <Link to="/add-note">
-                    <button className="add_note_btn">Add note</button>
+                    <button className="add-note-btn">Add New Note</button>
                 </Link>
             </section>
     )

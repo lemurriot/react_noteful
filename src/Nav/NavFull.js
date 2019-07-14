@@ -14,7 +14,7 @@ const folderList = props.folders.map(folder => <Folder key={folder.id} id={folde
                 {folderList}
             </FolderError>
             <Link to="/add-folder">
-                <button className="add_folder_btn">
+                <button className="add-folder-btn">
                     Add Folder
                 </button>
             </Link>

@@ -1,0 +1,14 @@
+.add-note-btn {
+    height: 50px;
+    width: 200px;
+    border-radius: 18px;
+    background-color: #6d48f9;
+    color: white;
+    margin-top: 5%;
+    font-size: 1.2em;
+}
+
+.add-note-btn:hover {
+    background-color: #4f2ed0;
+    cursor: pointer;
+}

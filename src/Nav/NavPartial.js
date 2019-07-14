@@ -10,7 +10,7 @@ export default function NavPartial(props) {
 
     return (
         <nav>
-            <button className="go_back_btn" onClick={props.routerHistoryProps.goBack}>
+            <button className="go-back-btn" onClick={props.routerHistoryProps.goBack}>
                 Go Back
             </button>
             <FolderError>

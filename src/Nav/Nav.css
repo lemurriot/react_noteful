@@ -2,3 +2,25 @@ nav {
     min-width: 30vw;
     padding: 2%;
 }
+
+.add-folder-btn {
+    background-color: #5d5df3;
+    color: white;
+    border-radius: 18px;
+}
+
+.add-folder-btn:hover {
+    background-color:  #4f2ed0;
+    cursor: pointer;
+}
+
+.go-back-btn {
+    margin-bottom: 5%;
+    background-color: #469446;
+    color: white;
+}
+
+.go-back-btn:hover {
+    cursor: pointer;
+    background-color: #327432;
+}
