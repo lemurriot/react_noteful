@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import ValidationError from './Validation/ValidationError'
 import uuid from 'uuid'
 import './AddNote.css'
 
@@ -66,7 +67,9 @@ export default class AddNote extends Component {
             selectedFolder: e.target.value
         })
     }
-    static contextType = NotefulContext
+    validateTitle(){
+        if (this.state.title.value.trim().length === 0) return 'Title is required'
+    }
     render() {
         const folderOptions = this.context.folders.map(folder => <option key={folder.id} value={folder.id} id={folder.id}>{folder.name}</option>)
         return (
@@ -82,7 +85,7 @@ export default class AddNote extends Component {
                         {folderOptions}
                     </select>
                     <label htmlFor="title">
-                        Title
+                        Title (required)
                     </label>
                     <input 
                         type="text" 
@@ -91,6 +94,7 @@ export default class AddNote extends Component {
                         value={this.state.title.value}
                         onChange={e => this.handleTitleInputChange(e)}
                     />
+                    {this.state.title.touched && (<ValidationError message={ this.validateTitle()} />)}
                     <label htmlFor="content">
                         Content
                     </label>
@@ -111,6 +115,7 @@ export default class AddNote extends Component {
                         <button 
                             className="submit-btn" 
                             type="submit"
+                            disabled={this.validateTitle()}
                         >
                             Submit
                         </button>
