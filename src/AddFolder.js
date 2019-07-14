@@ -20,6 +20,8 @@ export default class AddFolder extends Component {
             "id": uuid.v4(),
             "name": this.state.name.value
         }
+        // to break the code for testing error boundaries, comment out previous newFolder and uncomment following newFolder
+        // const newFolder = [1,2,3]
         fetch('http://localhost:9090/folders', {
             method: 'POST',
             body: JSON.stringify(newFolder),

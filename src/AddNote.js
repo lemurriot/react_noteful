@@ -1,27 +1,69 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import uuid from 'uuid'
 import './AddNote.css'
 
 export default class AddNote extends Component {
     constructor(props){
         super(props)
         this.state = {
-            title: '',
-            content: ''
+            title: {
+                value: '',
+                touched: false
+            },
+            content: {
+                value: '',
+                touched: false
+            },
+            selectedFolder: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
         }
     }
+
+    static contextType = NotefulContext
     handleSubmit(e){
         e.preventDefault()
-        console.log('submitted')
+        const newNote = {
+            id: uuid.v4(),
+            name: this.state.title.value,
+            modified: Date.now(),
+            folderId: this.state.selectedFolder,
+            content: this.state.content.value
+        }
+        fetch('http://localhost:9090/notes', {
+            method: 'POST',
+            body: JSON.stringify(newNote),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(res => {
+            if (!res.ok) throw new Error(res.status)
+            return res.json()
+        }).then(res => {
+            this.context.addNote(res)
+            this.props.history.push('/')
+        }).catch(error => {
+            console.log(error)
+        })
     }
     handleTitleInputChange(e){
         this.setState({
-            title: e.target.value
+            title: {
+                value: e.target.value,
+                touched: true
+            }
         })
     }
     handleContentInputChange(e){
         this.setState({
-            content: e.target.value
+            content: {
+                value: e.target.value,
+                touched: true
+            }
+        })
+    }
+    handleSelectFolder(e){
+        this.setState({
+            selectedFolder: e.target.value
         })
     }
     static contextType = NotefulContext
@@ -36,7 +78,7 @@ export default class AddNote extends Component {
                     <label htmlFor="folder">
                         Select a folder
                     </label>
-                    <select name="folder" id="folder">
+                    <select name="folder" id="folder" onChange={e => this.handleSelectFolder(e)}>
                         {folderOptions}
                     </select>
                     <label htmlFor="title">
@@ -46,7 +88,7 @@ export default class AddNote extends Component {
                         type="text" 
                         id="title" 
                         name="title"
-                        value={this.state.title}
+                        value={this.state.title.value}
                         onChange={e => this.handleTitleInputChange(e)}
                     />
                     <label htmlFor="content">
@@ -56,7 +98,7 @@ export default class AddNote extends Component {
                         type="text" 
                         id="content" 
                         name="content"
-                        value={this.state.content}
+                        value={this.state.content.value}
                         onChange={e => this.handleContentInputChange(e)}
                     />
                     <div className="form-button-group">
