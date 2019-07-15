@@ -66,7 +66,6 @@ class App extends Component {
       return res.json()
     }).then(res => {
       const newNoteSet = this.state.notes.filter(note => note.id !== noteId)
-      console.log(newNoteSet)
       this.setState({
         notes: newNoteSet
       })
@@ -99,9 +98,7 @@ class App extends Component {
     return (
       <NotefulContext.Provider value={contextVal}>
         <header>
-        <header>
             <Link to="/"><h1>Noteful</h1></Link>
-        </header>
         </header>
         <section className="main-section">
           <Switch>
