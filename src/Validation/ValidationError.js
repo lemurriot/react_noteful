@@ -4,12 +4,13 @@ import './ValidationError.css'
 
 export default function ValidationError(props) {
     return (
-        <div className="validation-message">
+        <div className="validation-message" id={props.validationId}>
             {props.message}
         </div>
     )
 }
 
 ValidationError.propTypes = {
-    message: PropTypes.string
+    message: PropTypes.string,
+    validationId: PropTypes.string.isRequired,
 }

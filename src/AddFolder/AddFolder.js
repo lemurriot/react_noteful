@@ -12,7 +12,7 @@ export default class AddFolder extends Component {
             name: {
                 value: '',
                 touched: false
-            }
+            },
         }
     }
     static contextType = NotefulContext
@@ -69,10 +69,13 @@ export default class AddFolder extends Component {
                         type="text" 
                         id="name" 
                         name="name" 
+                        aria-label="folder name"
+                        // aria-describedby="folderError"
+                        aria-required="true"
                         value={this.state.name.value}
                         onChange={e => this.handleInputUpdate(e)} required
                     />
-                    {this.state.name.touched && (<ValidationError message={this.validateFolderName()} />)}
+                    {this.state.name.touched && (<ValidationError message={this.validateFolderName()} validationId={"folderError"}/>)}
                     <div className="form-button-group">
                         <button 
                             className="cancel-btn"

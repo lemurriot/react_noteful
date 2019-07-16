@@ -94,9 +94,13 @@ export default class AddNote extends Component {
                         id="title" 
                         name="title"
                         value={this.state.title.value}
+                        aria-label="note title"
+                        aria-required="true"
+                        aria-describedby="titleError"
+                        required
                         onChange={e => this.handleTitleInputChange(e)}
                     />
-                    {this.state.title.touched && (<ValidationError message={ this.validateTitle()} />)}
+                    {this.state.title.touched && (<ValidationError message={ this.validateTitle()} validationId={"titleError"}/>)}
                     <label htmlFor="content">
                         Content
                     </label>
@@ -104,6 +108,8 @@ export default class AddNote extends Component {
                         type="text" 
                         id="content" 
                         name="content"
+                        aria-label="note content"
+                        aria-required="false"
                         value={this.state.content.value}
                         onChange={e => this.handleContentInputChange(e)}
                     />
