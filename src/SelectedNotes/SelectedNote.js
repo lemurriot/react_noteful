@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 
 export default function SelectedNote(props) {
-    const { name, content, id, modified } = props.notes
+    const { note_title, content, id, date_modified } = props.notes
     const deleteSelectedNote = id => {
         props.deleteNote(id)
         props.routeHistory.goBack()
@@ -13,8 +13,8 @@ export default function SelectedNote(props) {
         <div>
             <Note 
                 id={id}
-                name={name} 
-                modified={modified}
+                name={note_title} 
+                modified={date_modified}
                 deleteNote={deleteSelectedNote}
             />
             <p>{content}</p>
@@ -26,8 +26,8 @@ SelectedNote.propTypes = {
     deleteNote: PropTypes.func.isRequired,
     routeHistory: PropTypes.object.isRequired,
     notes: PropTypes.shape({     
-        id: PropTypes.string.isRequired,
-        modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
-        name: PropTypes.string.isRequired,     
+        id: PropTypes.number.isRequired,
+        date_modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
+        note_title: PropTypes.string.isRequired,     
     })
 }

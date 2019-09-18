@@ -16,8 +16,8 @@ export default class SelectedNotePage extends Component {
     render() {
         const { notes, folders, deleteNote } = this.context
         const { id: noteId } = this.props.match.params
-        const note = findCurrentNote(notes, noteId)
-        const folder = findCurrentFolder(folders, noteId, notes)
+        const note = findCurrentNote(notes, Number(noteId))
+        const folder = findCurrentFolder(folders, Number(noteId), notes)
         return (
             <>
                 <NavPartial 

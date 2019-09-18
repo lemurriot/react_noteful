@@ -24,7 +24,7 @@ export default class AddFolder extends Component {
         }
         // to break the code for testing error boundaries, comment out previous newFolder and uncomment following newFolder
         // const newFolder = [1,2,3]
-        fetch('http://localhost:9090/folders', {
+        fetch('http://localhost:8000/folder', {
             method: 'POST',
             body: JSON.stringify(newFolder),
             headers: {

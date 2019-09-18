@@ -32,7 +32,7 @@ export default class AddNote extends Component {
             folderId: this.state.selectedFolder,
             content: this.state.content.value
         }
-        fetch('http://localhost:9090/notes', {
+        fetch('http://localhost:8000/api/note', {
             method: 'POST',
             body: JSON.stringify(newNote),
             headers: {

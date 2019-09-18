@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 
 export default function NavFull(props) {
-const folderList = props.folders.map(folder => <Folder key={folder.id} id={folder.id} name={folder.name} highlighted={folder.id === props.selectedFolder.id}/>)
+const folderList = props.folders.map(folder => <Folder key={folder.id} id={folder.id} name={folder.folder_title} highlighted={folder.id === props.selectedFolder.id}/>)
     return (
         <nav>
             <FolderError>
@@ -24,8 +24,8 @@ const folderList = props.folders.map(folder => <Folder key={folder.id} id={folde
 
 NavFull.propTypes = {
     folders: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired
+        folder_title: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired
     })),
     selectedFolder: PropTypes.object.isRequired
 }

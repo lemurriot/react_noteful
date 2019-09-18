@@ -25,7 +25,7 @@ Note.defaultProps = {
 }
 Note.propTypes = {
     deleteNote: PropTypes.func.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number,]).isRequired,
     name: PropTypes.string.isRequired,
 }

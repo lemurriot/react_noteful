@@ -11,8 +11,8 @@ export default function NoteList(props) {
             <Note 
                 key={note.id}
                 id={note.id}
-                name={note.name} 
-                modified={note.modified}
+                name={note.note_title} 
+                modified={note.date_modified}
                 deleteNote={props.deleteNote}
             />
             );
@@ -32,9 +32,9 @@ NoteList.propTypes = {
     deleteNote: PropTypes.func.isRequired,
     notes: PropTypes.arrayOf(PropTypes.shape({
         content: PropTypes.string.isRequired,
-        folderId: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
-        modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-        name: PropTypes.string.isRequired,
+        folder_id: PropTypes.number.isRequired,
+        id: PropTypes.number.isRequired,
+        date_modified: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        note_title: PropTypes.string.isRequired,
     }))
 }

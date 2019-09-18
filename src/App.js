@@ -18,7 +18,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:9090/notes')
+    fetch('http://localhost:8000/api/note')
       .then(res => {
         if (!res.ok) {
           throw new Error(res.status)
@@ -34,7 +34,7 @@ class App extends Component {
           error
         })
       })
-    fetch('http://localhost:9090/folders')
+    fetch('http://localhost:8000/api/folder')
       .then(res => {
         if (!res.ok) {
           throw new Error(res.status)
@@ -54,7 +54,7 @@ class App extends Component {
 
   deleteNote = (noteId) => {
 
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/note/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'

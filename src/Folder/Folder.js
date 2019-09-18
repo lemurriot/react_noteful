@@ -21,6 +21,6 @@ export default function Folder(props) {
 
 Folder.propTypes = {
     highlighted: PropTypes.bool.isRequired,
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
 }
