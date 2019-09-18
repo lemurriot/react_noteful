@@ -63,9 +63,9 @@ class App extends Component {
       if (!res.ok){
         throw new Error(res.status)
       }
-      return res.json()
+      // return res.json()
     }).then(res => {
-      const newNoteSet = this.state.notes.filter(note => note.id !== noteId)
+      const newNoteSet = this.state.notes.filter(note => note.id !== Number(noteId))
       this.setState({
         notes: newNoteSet
       })
