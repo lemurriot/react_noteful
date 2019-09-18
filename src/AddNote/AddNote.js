@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import NotefulContext from '../NotefulContext'
 import ValidationError from '../Validation/ValidationError'
 import PropTypes from 'prop-types'
-
-import uuid from 'uuid'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -18,7 +16,7 @@ export default class AddNote extends Component {
                 value: '',
                 touched: false
             },
-            selectedFolder: "b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1"
+            selectedFolder: null
         }
     }
 
@@ -26,10 +24,8 @@ export default class AddNote extends Component {
     handleSubmit(e){
         e.preventDefault()
         const newNote = {
-            id: uuid.v4(),
-            name: this.state.title.value,
-            modified: Date.now(),
-            folderId: this.state.selectedFolder,
+            note_title: this.state.title.value,
+            folder_id: this.state.selectedFolder,
             content: this.state.content.value
         }
         fetch('http://localhost:8000/api/note', {
@@ -73,7 +69,7 @@ export default class AddNote extends Component {
         if (this.state.title.value.trim().length === 0) return 'Title is required'
     }
     render() {
-        const folderOptions = this.context.folders.map(folder => <option key={folder.id} value={folder.id} id={folder.id}>{folder.name}</option>)
+        const folderOptions = this.context.folders.map(folder => <option key={folder.id} value={folder.id} id={folder.id}>{folder.folder_title}</option>)
         return (
             <section className="add-note-section">
                 <form 

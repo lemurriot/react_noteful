@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import uuid from 'uuid'
 import NotefulContext from '../NotefulContext'
 import ValidationError from '../Validation/ValidationError'
 import PropTypes from 'prop-types'
@@ -19,12 +18,11 @@ export default class AddFolder extends Component {
     handleSubmit(e){
         e.preventDefault()
         const newFolder = {
-            "id": uuid.v4(),
-            "name": this.state.name.value
+            "folder_title": this.state.name.value
         }
         // to break the code for testing error boundaries, comment out previous newFolder and uncomment following newFolder
         // const newFolder = [1,2,3]
-        fetch('http://localhost:8000/folder', {
+        fetch('http://localhost:8000/api/folder', {
             method: 'POST',
             body: JSON.stringify(newFolder),
             headers: {
