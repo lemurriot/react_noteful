@@ -54,7 +54,7 @@ class App extends Component {
 
   deleteNote = (noteId) => {
 
-    fetch(`https://aqueous-wave-36481.herokuapp.com/api/note${noteId}`, {
+    fetch(`https://aqueous-wave-36481.herokuapp.com/api/note/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
