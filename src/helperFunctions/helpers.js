@@ -12,7 +12,6 @@ export const findCurrentNote = (notes, noteId) => {
 export const findCurrentFolder = (folders, noteId, notes) => {
   const stubFolder = { id: 5000, folder_title: "none" };
   const getNote = findCurrentNote(notes, noteId);
-  console.log(getNote, folders)
   const currentFolderId = getNote.folder_id;
   const currentFolder = folders.find(folder => folder.id === currentFolderId);
   return currentFolder ? [currentFolder] : [stubFolder];
@@ -20,7 +19,6 @@ export const findCurrentFolder = (folders, noteId, notes) => {
 
 export const findCurrentFolderSelection = (folders, notes, folderId) => {
   const currentFolder = folders.find(folder => folder.id === folderId) || {};
-  console.log(notes)
   const currentNotes =
     notes.filter(note => note.folder_id === currentFolder.id) || {};
   return {

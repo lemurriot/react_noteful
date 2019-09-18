@@ -16,7 +16,7 @@ export default class AddNote extends Component {
                 value: '',
                 touched: false
             },
-            selectedFolder: null
+            selectedFolder: 1
         }
     }
 
@@ -28,7 +28,7 @@ export default class AddNote extends Component {
             folder_id: this.state.selectedFolder,
             content: this.state.content.value
         }
-        fetch('http://localhost:8000/api/note', {
+        fetch('https://aqueous-wave-36481.herokuapp.com/api/note', {
             method: 'POST',
             body: JSON.stringify(newNote),
             headers: {

@@ -17,7 +17,6 @@ export default class SelectedFolderPage extends Component {
         const { folders, notes, deleteNote } = this.context
         const { id: folderId } = this.props.match.params
         const selectedFolder = findCurrentFolderSelection(folders, notes, Number(folderId))
-        console.log(selectedFolder)
         return (
             <>
                 <NavFull 

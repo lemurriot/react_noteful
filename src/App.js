@@ -18,7 +18,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    fetch('http://localhost:8000/api/note')
+    fetch('https://aqueous-wave-36481.herokuapp.com/api/note')
       .then(res => {
         if (!res.ok) {
           throw new Error(res.status)
@@ -34,7 +34,7 @@ class App extends Component {
           error
         })
       })
-    fetch('http://localhost:8000/api/folder')
+    fetch('https://aqueous-wave-36481.herokuapp.com/api/folder')
       .then(res => {
         if (!res.ok) {
           throw new Error(res.status)
@@ -54,7 +54,7 @@ class App extends Component {
 
   deleteNote = (noteId) => {
 
-    fetch(`http://localhost:8000/api/note/${noteId}`, {
+    fetch(`https://aqueous-wave-36481.herokuapp.com/api/note${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
